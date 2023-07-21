@@ -1,47 +1,113 @@
-.song {
-  height: 100px;
-  display: flex;
-  max-width: 500px;
-  width: 70vw;
-  align-items: center;
-  overflow: hidden;
+.header,
+.text {
+  padding: 0 1rem;
 }
 
-.image {
-  display: inline;
-  object-fit: cover;
-  width: 100px;
-  height: 100px;
+.header {
+  font-size: 2rem; 
+  margin-bottom: 1.25rem;
 }
 
 .text {
-  overflow: hidden;
-  padding: 25px;
-  position: relative;
-  display: inline;
-  font-size: 30px;
+  font-size: 1.25rem; 
 }
 
-.playing {
-  color: #1db954;
+.left {
+  margin-right: auto;
 }
 
-.playingImg {
-  margin-left: auto;
+.contentContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 70vh;
 }
 
-.none {
+.button {
+  background-color: var(--button-color);
+  color: #191414;
+  border: none;
+  font-size: 2rem;
+  padding: 0.9375rem 1.25rem;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 1.25rem;
+}
+
+.subButton {
+  background-color: var(--sub-button-color);
+  font-size: 1.25rem;
+}
+
+.button:active {
+  background-color: var(--active-button-color);
+}
+
+.subButton:active {
+  background-color: var(--active-sub-button-color);
+}
+
+.code {
+  width: 90vw;
+  margin: 0 0.3125rem;
+  overflow-x: scroll;
+}
+
+.code::-webkit-scrollbar {
   display: none;
 }
 
-@media only screen and (max-width: 600px) {
-  .text {
-    font-size:20px;
+.instruction2Container {
+  position: relative;
+}
+
+.instructionsContainer img {
+  width: 397px;
+}
+
+.urlValue {
+  position: absolute;
+  outline: none;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  top: 107px;
+  left: 158px;
+  height: 17px;
+  width: 187px;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 450px) { 
+  .instructionsContainer img {
+    width: 300px;
+  }
+
+  .urlValue {
+    font-size: 0.625rem;
+    top: 80px;
+    left: 120px;
+    height: 0.75rem;
+    width: 8.875rem;
   }
 }
 
-@media only screen and (max-width: 400px) {
-  .text {
-    font-size:15px;
-  }
+.main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.footer {
+  background-color: #1f1919;
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.footer > * {
+  padding: 0 10px;
 }

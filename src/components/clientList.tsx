@@ -1,12 +1,12 @@
-import styles from '../styles/ClientList.module.css'
 import spotStyles from '../styles/Spot.module.css'
 
 const ClientList = (props: {listeners?: [{name: string, isHost: boolean, watchingAD: boolean}]}) => {
+  console.log("Styles", spotStyles);
   return (
-    <div className={`${styles.list} ${spotStyles.box}`}>
+    <div className={`${spotStyles.list} ${spotStyles.box}`}>
       {
         props.listeners?.map((client, i) => 
-          <div key={i} className={styles.text}>{client.name}
+          <div key={i} className={spotStyles.text}>{client.name}
             {client.isHost?
               <span title='Host'>🕹️</span>
             : <></>}

@@ -1,11 +1,16 @@
+
+.header,
+.text {
+  padding: 0 1rem;
+}
+
 .header {
-  font-size: 30px; 
-  padding: 0 10px;
+  font-size: 2rem; 
+  margin-bottom: 1.25rem;
 }
 
 .text {
-  font-size: 20px; 
-  padding: 0 30px;
+  font-size: 1.25rem; 
 }
 
 .left {
@@ -16,35 +21,36 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-height: 70vh;
+  padding: 46px 0 46px 0;
 }
 
 .button {
-  background-color: #1db954;
+  background-color: var(--primary-color);
   color:#191414;
   border: none;
-  font-size: 30px;
-  padding: 15px 20px;
+  font-size: 2rem;
+  padding: 0.9375rem 1.25rem;
   border-radius: 10px;
   cursor: pointer;
+  margin-top: 1.25rem;
 }
 
 .subButton {
-  background-color: #c84cc8;
-  font-size: 20px;
+  background-color: var(--secondary-color);
+  font-size: 1.25rem;
 }
 
 .button:active {
-  background-color: #14a748;
+  background-color: var(--dark-primary-color);
 }
 
 .subButton:active {
-  background-color: #a53ea5;
+  background-color: var(--dark-secondary-color);
 }
 
 .code {
   width: 90vw;
-  margin: 0 5px;
+  margin: 0 0.3125rem;
   overflow-x: scroll;
 }
 
@@ -76,19 +82,27 @@
   overflow: hidden;
 }
 
+
 @media only screen and (max-width: 450px) { 
   .instructionsContainer img {
     width: 300px;
   }
 
   .urlValue {
-    font-size: 10px;
+    font-size: 0.625rem;
 
     top: 80px;
     left: 120px;
-    height: 12px;
-    width: 142px;
+    height: 0.75rem;
+    width: 8.875rem;
   }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 auto; /* This will make the main content flex to fill the space available */
 }
 
 .footer {
@@ -97,6 +111,7 @@
   width: 100%;
   display: flex;
   align-items: center;
+  flex-shrink: 0; /* This will prevent the footer from shrinking if there's not enough space */
 }
 
 .footer > * {

@@ -1,7 +1,5 @@
-
-
 .mainTextContainer {
-  height: 30vh;
+  height: 16vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,7 +8,7 @@
 
 .mainText {
   color: #1db954;
-  font-size: 7vw;
+  font-size: 6vw;
 }
 
 .specialText {
@@ -18,7 +16,7 @@
   background: linear-gradient(rgba(29,185,84,1) 0%, rgba(29,185,181,1) 41%, rgb(185, 39, 185) 80%);
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-size: 8vw;
+  font-size: 6vw;
 }
 
 @media only screen and (max-width: 1000px) {
