@@ -3,6 +3,12 @@ import config from '../config'
 import SocketServer from "./socket"
 import SongInfo from "./web-shared/songInfo"
 
+export type ContextTrack = {
+  uri: string;
+  uid?: string | null;
+  metadata?: any;
+}
+
 export default class Player {
   public trackUri = ""
   public paused = true
@@ -12,6 +18,7 @@ export default class Player {
   public millisecondsLastUpdate = Date.now()
   public songInfo = new SongInfo()
   public loadAtMilliseconds = 0;
+  public queue: ContextTrack[] = [];
   
   constructor(public socketServer: SocketServer) { }
 
@@ -57,6 +64,26 @@ export default class Player {
         this.trackLoaded()
       }, config.maxDelay)
     }
+  }
+
+  getQueue() {
+    return this.queue;
+  }
+
+  addToQueue(tracks: ContextTrack[]) {
+    this.queue.push(...tracks);
+    this.socketServer.emitToListeners('addToQueue', [...tracks]);
+  }
+
+  removeFromQueue(tracks: ContextTrack[]) {
+    let track = this.queue.filter((t) => !tracks.includes(t));
+    this.queue = track;
+    this.socketServer.emitToListeners('removeFromQueue', [...track]);
+  }
+  
+  clearQueue() {
+    this.queue = [];
+    this.socketServer.emitToListeners('clearQueue');
   }
 
   /*
@@ -169,6 +196,10 @@ export default class Player {
   
   onRequestSongInfo(info: ClientInfo) {
     info.socket.emit("songInfo", this.songInfo)
+  }
+
+  onRequestQueue(info: ClientInfo) {
+    info.socket.emit('requestQueue', this.queue);
   }
 
   onNoListeners() {

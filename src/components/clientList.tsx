@@ -1,7 +1,6 @@
 import spotStyles from '../styles/Spot.module.css'
 
 const ClientList = (props: {listeners?: [{name: string, isHost: boolean, watchingAD: boolean}]}) => {
-  console.log("Styles", spotStyles);
   return (
     <div className={`${spotStyles.list} ${spotStyles.box}`}>
       {

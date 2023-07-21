@@ -24,6 +24,7 @@ const Index: NextPage = () => {
       console.log("connected!");
       socket.emit("requestSongInfo");
       socket.emit("requestListeners");
+      socket.emit("requestQueue");
     });
   }, []);
 

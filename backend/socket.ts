@@ -2,7 +2,7 @@ import { Server, Socket } from "socket.io";
 import ClientInfo from "./clientInfo";
 import config from "../config";
 import ClientVersionValidator from './clientVersionValidator';
-import Player from "./player";
+import Player, { ContextTrack } from "./player";
 
 export default class SocketServer {
   clientsInfo = new Map<string, ClientInfo>()
@@ -88,6 +88,8 @@ export default class SocketServer {
           info.loggedIn = true;
           this.player?.listenerLoggedIn(info)
           this.sendListeners()
+          console.log(`Sending queue to ${name}`)
+          socket.emit('queueUpdate', this.player?.getQueue())
         } else {
           if (badVersion != null)
             badVersion(config.clientVersionRequirements)
@@ -140,6 +142,23 @@ export default class SocketServer {
       socket.on("requestSong", (trackUri: string, trackName: string) => {
         this.getHost()?.socket.emit("songRequested", trackUri, trackName, info.name)
       })
+
+      // Queue events
+      socket.on("requestQueue", () => {
+        this.player?.onRequestQueue(info);
+      });
+
+      socket.on("addToQueue", (tracks: ContextTrack[]) => {
+        this.player?.addToQueue(tracks);
+      });
+
+      socket.on("removeFromQueue", (tracks: ContextTrack[]) => {
+        this.player?.removeFromQueue(tracks);
+      });
+
+      socket.on("clearQueue", () => {
+        this.player?.clearQueue();
+      });
 
       socket.on("disconnecting", (reason) => {
         this.clientsInfo.delete(socket.id)
