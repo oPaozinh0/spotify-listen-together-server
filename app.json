@@ -2,7 +2,11 @@
   "name": "Spotify Listen Together Server",
   "description": "A server for the Spotify Listen Together extension.",
   "repository": "https://github.com/FlafyDev/spotify-listen-together-server",
-  "keywords": ["spotify", "spicetify", "listen together"],
+  "keywords": [
+    "spotify",
+    "spicetify",
+    "listen together"
+  ],
   "env": {
     "HOST_PASSWORD": {
       "description": "The password a listener must have to get host access.",

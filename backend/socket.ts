@@ -100,11 +100,13 @@ export default class SocketServer {
 
       socket.on("requestHost", (password: string) => {
         if (password === config.hostPassword) {
-          if ([...this.clientsInfo.values()].every((info: ClientInfo) => !info.loggedIn || !info.isHost)) {
-            this.updateHost(info, true)
-          } else {
-            socket.emit("bottomMessage", "There is already an host.")
-          }
+          // if ([...this.clientsInfo.values()].every((info: ClientInfo) => !info.loggedIn || !info.isHost)) {
+          //   this.updateHost(info, true)
+          // } else {
+          //   socket.emit("bottomMessage", "There is already an host.")
+          // }
+          this.updateHost(info, true);
+          socket.emit("bottomMessage", "Host permissions acquired.", true)
         } else {
           this.updateHost(info, false)
           socket.emit("bottomMessage", "Incorrect password.", true)
