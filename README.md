@@ -1,9 +1,9 @@
 # Spotify Listen Together (Server)
-To understand what this is, visit [Spotify Listen Together](https://github.com/FlafyDev/spotify-listen-together).
+To understand what this is, visit [Spotify Listen Together](https://github.com/CoronaBringer/spotify-listen-together).
 
 ### Creating a server
 The server must be hosted somewhere.
 
-To host with Heroku:
+To host with Render:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/CoronaBringer/spotify-listen-together-server)
