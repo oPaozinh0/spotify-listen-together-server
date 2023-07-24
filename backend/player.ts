@@ -76,9 +76,16 @@ export default class Player {
   }
 
   removeFromQueue(tracks: ContextTrack[]) {
-    let track = this.queue.filter((t) => !tracks.includes(t));
-    this.queue = track;
-    this.socketServer.emitToListeners('removeFromQueue', [...track]);
+    const removedTracks: ContextTrack[] = [];
+
+    for (const trackToRemove of tracks) {
+      const index = this.queue.findIndex(track => track.uri === trackToRemove.uri);
+      if (index !== -1) {
+        removedTracks.push(this.queue.splice(index, 1)[0]);
+      }
+    }
+
+    this.socketServer.emitToListeners('removeFromQueue', removedTracks);
   }
   
   clearQueue() {
