@@ -21,23 +21,26 @@ export default class SocketServer {
 
   emitToNonListeners(ev: string, ...args: any) {
     [...this.clientsInfo.values()].filter((info: ClientInfo) => !info.loggedIn).forEach(info => {
+      console.log(`Emit queued for non-listeners, event: ${ev}`)
       info.socket.emit(ev, ...args)
     })
   }
 
   emitToListeners(ev: string, ...args: any) {
+    console.log(`Emit queued for listeners, event: ${ev}`)
     let listeners = this.getListeners()
     let maxLatency = 0
     let minLatency = config.maxDelay
     listeners.forEach(info => {
-      // console.log(`Latency for ${info.name} is ${info.latency}`)
+      console.log(`Latency for ${info.name} is ${info.latency}`)
       maxLatency = Math.max(info.latency, maxLatency)
       minLatency = Math.min(info.latency, minLatency)
     })
     listeners.forEach(info => {
       let delay = ((maxLatency - minLatency) - (info.latency - minLatency))
-      // console.log(`Sending to ${socketId} with ${delay} ms delay.`)
+      console.log(`Sending to ${socketId} with ${delay} ms delay.`)
       setTimeout(() => {
+        console.log(`Emitting event: ${ev}`)
         info.socket.emit(ev, ...args) 
       }, delay)
     });
