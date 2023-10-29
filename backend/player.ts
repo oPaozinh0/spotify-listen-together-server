@@ -39,6 +39,7 @@ export default class Player {
     Commands
   */
   updateSong(pause: boolean, milliseconds: number) {
+    console.log(`function call: updateSong(pause:${pause}, milliseconds:${milliseconds})`)
     if (this.loadingTrack === null && Player.isTrackListenable(this.trackUri)) {
       this.paused = pause
       this.milliseconds = milliseconds
@@ -52,6 +53,7 @@ export default class Player {
   }
 
   changeSong(trackUri: string) {
+    console.log(`function call: changeSong(trackUri:${trackUri})`)
     if (Player.isTrackListenable(trackUri)) {
       if (this.loadingTrack !== null)
         clearTimeout(this.loadingTrack)
@@ -71,11 +73,13 @@ export default class Player {
   }
 
   addToQueue(tracks: ContextTrack[]) {
+    console.log(`function call: addToQueue(tracks:${tracks})`)
     this.queue.push(...tracks);
     this.socketServer.emitToListeners('addToQueue', [...tracks]);
   }
 
   removeFromQueue(tracks: ContextTrack[]) {
+    console.log(`function call: removeFromQueue(tracks:${tracks})`)
     const removedTracks: ContextTrack[] = [];
 
     for (const trackToRemove of tracks) {
@@ -89,6 +93,7 @@ export default class Player {
   }
   
   clearQueue() {
+    console.log(`function call: clearQueue()`)
     this.queue = [];
     this.socketServer.emitToListeners('clearQueue');
   }
@@ -97,6 +102,7 @@ export default class Player {
     Requests
   */
   requestUpdateSong(info: ClientInfo | undefined, pause: boolean, milliseconds: number) {
+    console.log(`function call: requestUpdateSong(info: ${info}, pause: ${pause}, milliseconds: ${milliseconds})`)
     if (info === undefined || info?.isHost) {
       if (this.locked) {
         info?.socket.emit("bottomMessage", "Listen together is currently locked!", true)
@@ -110,6 +116,7 @@ export default class Player {
     Updates
   */
   listenerLoadingSong(info: ClientInfo, newTrackUri: string) {
+    console.log(`function call: listenerLoadingSong(info: ${info}, newTrackUri: ${newTrackUri})`)
     if (info.isHost && newTrackUri !== this.trackUri) {
       if (this.locked) {
         info.socket.emit("bottomMessage", "Listen together is currently locked!", true)
@@ -120,6 +127,7 @@ export default class Player {
   }
 
   listenerChangedSong(info: ClientInfo, newTrackUri: string, songName?: string, songImage?: string) {
+    console.log(`function call: listenerChangedSong(info: ${info}, newTrackUri: ${newTrackUri})`)
     if (newTrackUri === "") {
       return;
     }
@@ -138,6 +146,7 @@ export default class Player {
   }
 
   listenerLoggedIn(info: ClientInfo) {
+    console.log(`function call: listenerLoggedIn(info: ${info})`)
     this.checkListenerHasAD()
     if (!this.locked) {
       this.checkDesynchronizedListeners()
@@ -145,6 +154,7 @@ export default class Player {
   }
 
   listenerLoggedOut() {
+    console.log(`function call: listenerLoggedOut()`)
     this.checkListenerHasAD()
   }
 
@@ -202,10 +212,12 @@ export default class Player {
   }
   
   onRequestSongInfo(info: ClientInfo) {
+    console.log(`function call: onRequestSongInfo(info: ${info})`)
     info.socket.emit("songInfo", this.songInfo)
   }
 
   onRequestQueue(info: ClientInfo) {
+    console.log(`function call: onRequestQueue(info: ${info})`)
     info.socket.emit('requestQueue', this.queue);
   }
 
@@ -217,6 +229,7 @@ export default class Player {
   }
   
   updateSongInfo(newName?: string, newImage?: string) {
+    console.log(`function call: updateSongInfo()`)
     if (newName != undefined)
       this.songInfo.name = newName
 
