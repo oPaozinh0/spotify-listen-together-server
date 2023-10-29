@@ -38,7 +38,7 @@ export default class SocketServer {
     })
     listeners.forEach(info => {
       let delay = ((maxLatency - minLatency) - (info.latency - minLatency))
-      console.log(`Sending to ${socketId} with ${delay} ms delay.`)
+      console.log(`Sending to ${info.name} with ${delay} ms delay.`)
       setTimeout(() => {
         console.log(`Emitting event: ${ev}`)
         info.socket.emit(ev, ...args) 
