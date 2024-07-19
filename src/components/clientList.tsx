@@ -10,7 +10,7 @@ const ClientList = (props: {listeners?: [{name: string, isHost: boolean, watchin
               <span title='Host'>🕹️</span>
             : <></>}
             {client.watchingAD?
-              <span title='Watching an AD'>💵</span>
+              <span title='Assistindo um AD'>💵</span>
             : <></>}
           </div>
         )
