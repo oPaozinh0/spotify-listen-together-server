@@ -21,7 +21,7 @@ const Index: NextPage = () => {
     socket.on("listeners", (clients: any) => setClients(clients));
 
     socket.on("connect", () => {
-      console.log("connected!");
+      console.log("conectado!");
       socket.emit("requestSongInfo");
       socket.emit("requestListeners");
       socket.emit("requestQueue");
@@ -33,32 +33,32 @@ const Index: NextPage = () => {
   };
 
   return (
-<main className={styles.main}>
-  <Head>
-    <link rel="shortcut icon" href="/static/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  </Head>
-  <Header />
-  <div className={styles.contentContainer}>
-    <h1 className={styles.header}>Your friends are currently listening to...</h1>
-    <Song song={songInfo} />
-    <h2 className={styles.header}>Who&apos;s listening?</h2>
-    <ClientList listeners={clients} />
-    <button className={styles.button} onClick={openSpotify}>Listen with them!</button>
-    <Link href="/instructions" passHref>
-      <button className={`${styles.button} ${styles.subButton}`}>Download</button>
-    </Link>
-  </div>
-  <footer className={styles.footer}>
-    <a href='https://github.com/FlafyDev/spotify-listen-together'>
-      <img src='/images/Github.png' width={64} alt="Github" />
-    </a>
-    <p>Made by <a href='https://github.com/FlafyDev'>FlafyDev</a></p>
-    <p>Recommended client v{config.clientRecommendedVersion}</p>
-  </footer>
-</main>
+      <main className={styles.main}>
+        <Head>
+          <link rel="shortcut icon" href="/static/favicon.ico" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        </Head>
+        <Header />
+        <div className={styles.contentContainer}>
+          <h1 className={styles.header}>Seus amigos estão ouvindo atualmente...</h1>
+          <Song song={songInfo} />
+          <h2 className={styles.header}>Quem está ouvindo?</h2>
+          <ClientList listeners={clients} />
+          <button className={styles.button} onClick={openSpotify}>Ouça com eles!</button>
+          <Link href="/instructions" passHref>
+            <button className={`${styles.button} ${styles.subButton}`}>Baixar</button>
+          </Link>
+        </div>
+        <footer className={styles.footer}>
+          <a href='https://github.com/FlafyDev/spotify-listen-together'>
+            <img src='/images/Github.png' width={64} alt="Github" />
+          </a>
+          <p>Feito por <a href='https://github.com/FlafyDev'>FlafyDev</a></p>
+          <p>Versão recomendada do cliente v{config.clientRecommendedVersion}</p>
+        </footer>
+      </main>
   );
 }
 
